@@ -3,7 +3,6 @@
 import rospy
 from std_msgs.msg import String
 
-import RPi.GPIO as GPIO
 import time
 # hello
 # hey there
@@ -17,36 +16,21 @@ def talker():
     
     pub.publish( 'start' )
 
-    # Set up the GPIO pins
-    
-    left_pin = 18
-    right_pin = 24
-    debounce_sleep = 0.2
-    
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(left_pin,GPIO.IN,pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(right_pin,GPIO.IN,pull_up_down=GPIO.PUD_UP)
-
-
     while not rospy.is_shutdown():
 
         # detect button presses on the two pins
+        new_direction = input("New direction: ")
         
-        left = GPIO.input(left_pin)
-        right = GPIO.input(right_pin)
-        
-        if left == False:
+        if new_direction == 'left':
             
             rospy.loginfo( 'left' )
             
             # simple button debounce
-            time.sleep( debounce_sleep )
             pub.publish( 'left' )
             
-        if right == False:
+        if new_direction == 'right':
             
             rospy.loginfo( 'right' )
-            time.sleep( debounce_sleep )
             pub.publish( 'right' )
         
         rate.sleep();
