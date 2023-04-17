@@ -2,6 +2,7 @@
 
 import rospy
 from std_msgs.msg import String
+import rclpy
 
 import time
 # hello

@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-import rospy
+import rclpy
 from std_msgs.msg import String
+from rclpy.node import Node
 import pi_servo_hat
 import time
 
